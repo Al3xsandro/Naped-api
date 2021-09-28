@@ -5,7 +5,7 @@ import {
     Entity
 } from 'typeorm';
 
-@Entity()
+@Entity("news")
 export class News {
     @PrimaryColumn()
     id: string;

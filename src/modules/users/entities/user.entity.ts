@@ -5,7 +5,7 @@ import {
     CreateDateColumn
 } from 'typeorm';
 
-@Entity("User")
+@Entity("users")
 export class User {
     @PrimaryColumn()
     id: string;
