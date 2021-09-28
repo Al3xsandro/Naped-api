@@ -5,10 +5,12 @@ import {
     CreateDateColumn
 } from 'typeorm';
 
+import { v4 as uuid } from 'uuid';
+
 @Entity("users")
 export class User {
     @PrimaryColumn()
-    id: string;
+    readonly id: string;
 
     @Column()
     email: string;
@@ -27,4 +29,10 @@ export class User {
 
     @CreateDateColumn()
     created_at: Date;
-}
+
+    constructor(){
+        if(!this.id){
+            this.id = uuid();
+        }
+    };
+};
