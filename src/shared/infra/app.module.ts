@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { NewsModule } from 'src/modules/news/news.module';
 import { UserModule } from 'src/modules/users/users.module';
 
+import { User } from 'src/modules/users/entities/user.entity';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env'}),
@@ -16,11 +18,7 @@ import { UserModule } from 'src/modules/users/users.module';
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
-      entities: [__dirname + 'dist/**/*.entity{.ts,.js}'],
-      migrations: ['dist/shared/infra/typeorm/migrations/*.{.ts,.js}'],
-      cli: {
-          migrationsDir: 'dist/shared/infra/typeorm/migrations'
-      },
+      entities: [User],
       synchronize: false
     }),
     UserModule,
