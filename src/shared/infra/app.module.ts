@@ -19,7 +19,7 @@ import { User } from 'src/modules/users/entities/user.entity';
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
       entities: [User],
-      synchronize: false
+      synchronize: true
     }),
     UserModule,
     NewsModule
