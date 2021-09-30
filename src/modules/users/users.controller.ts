@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { 
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards
+} from '@nestjs/common';
+
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UsersService } from './users.service';
@@ -7,12 +16,13 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/me')
-  public async find() {
-    return;
+  public async me(@Request() req: { user: string }) {
+    return this.userService.me(req.user);
   };
 
-  @Post('/register')
+  @Post('/create')
   public async create(@Body() createUserDTO: CreateUserDTO) {
     return this.userService.create(createUserDTO);
   };
