@@ -8,11 +8,38 @@
 
   - Rotas 🚀
     
+    `[POST]` /users/create
+     - Criar um novo usuário
+
+            {
+              email: "`example@example.com`",
+              username: "`example`",
+              password: "`hardpassword`"
+            }
+    `[POST]` /users/auth
+    - Obter token jwt
+
+          {
+            email: "`example@example.com`",
+            password: "`hardpassword`"
+          }
+          
+     `[GET]` /users/me
+     - Obter informações do usuário
+
+           {
+              id: "75659bcc-b2c1-4eae-82f1-788259ae3022",
+              email: "example@example.com",
+              username: "example",
+              isVerified: false,
+              isAdmin: false,
+              created_at: "2021-09-28T14:26:24.414Z"
+           }
 
 ## Instalação
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Iniciando a aplicação
@@ -26,6 +53,9 @@ $ yarn start:dev
 
 # production mode
 $ yarn start:prod
+
+# tests 
+$ yarn test
 ```
 
 ## License
