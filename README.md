@@ -54,15 +54,15 @@
               created_at: ""
             }
             
-   `[POST]` /news/create
-   - Criar nova notícia
-      
-          {
-            title: "",
-            description: "",
-            thumbnail: "",
-            categorie: ""
-          }
+     `[POST]` /news/create
+     - Criar nova notícia
+
+            {
+              title: "",
+              description: "",
+              thumbnail: "",
+              categorie: ""
+            }
 
 ## Instalação
 
