@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,7 +13,7 @@ import { News } from 'src/modules/news/entities/news.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env'}),
+    ConfigModule.forRoot({ envFilePath: '.env' }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.TYPEORM_HOST,
@@ -21,13 +22,17 @@ import { News } from 'src/modules/news/entities/news.entity';
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
       entities: [User, News],
-      synchronize: true
+      synchronize: true,
+    }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10
     }),
     UserModule,
     NewsModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {}
