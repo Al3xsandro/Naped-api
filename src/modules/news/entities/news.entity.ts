@@ -1,41 +1,36 @@
-import {
-    PrimaryColumn,
-    Column,
-    CreateDateColumn,
-    Entity
-} from 'typeorm';
+import { PrimaryColumn, Column, CreateDateColumn, Entity } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
 
-@Entity("news")
+@Entity('news')
 export class News {
-    @PrimaryColumn()
-    readonly id: string;
+  @PrimaryColumn()
+  readonly id: string;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    description: string;
-    
-    @Column()
-    likes: number;
+  @Column()
+  description: string;
 
-    @Column()
-    views: number;
+  @Column({ default: 0 })
+  likes: number;
 
-    @Column()
-    thumbnail: string;
+  @Column({ default: 0 })
+  views: number;
 
-    @Column()
-    categorie: string;
+  @Column()
+  thumbnail: string;
 
-    @CreateDateColumn()
-    created_at: Date;
+  @Column()
+  categorie: string;
 
-    constructor(){
-        if(!this.id){
-            this.id = uuid();
-        }
-    };
-};
+  @CreateDateColumn()
+  created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
+}
