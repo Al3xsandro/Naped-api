@@ -1,10 +1,10 @@
-import { 
+import {
   Body,
   Controller,
   Get,
   Post,
   Request,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -20,10 +20,10 @@ export class UsersController {
   @Get('/me')
   public async me(@Request() req: { user: string }) {
     return this.userService.me(req.user);
-  };
+  }
 
   @Post('/create')
   public async create(@Body() createUserDTO: CreateUserDTO) {
     return this.userService.create(createUserDTO);
-  };
-};
+  }
+}

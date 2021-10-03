@@ -1,8 +1,8 @@
 import {
-    Injectable,
-    BadRequestException,
-    HttpException,
-    HttpStatus,
+  Injectable,
+  BadRequestException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { CreateUserDTO } from './dto/create-user.dto';
@@ -17,56 +17,52 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
+    private usersRepository: Repository<User>,
   ) {}
 
   async me(id: string) {
     const user = await this.usersRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    const {
-      password,
-      ...rest
-    } = user;
+    const { password, ...rest } = user;
 
     return rest;
-  };
+  }
 
   async create(createUserDTO: CreateUserDTO) {
-    const { 
-      email,
-      username,
-      password
-    } = createUserDTO;
+    const { email, username, password } = createUserDTO;
 
     if (!email || !username || !password) {
       throw new BadRequestException();
     }
 
     const userAlreadyExists = await this.usersRepository.findOne({
-      email
+      email,
     });
 
-    if(userAlreadyExists)
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'This user already exists!'
-      }, HttpStatus.BAD_REQUEST);
+    if (userAlreadyExists)
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'This user already exists!',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
 
     const hashPassword = await hash(password, 8);
 
     const user = this.usersRepository.create({
       email,
       username,
-      password: hashPassword
+      password: hashPassword,
     });
 
     const createUser = await this.usersRepository.save(user);
 
     return {
       email: createUser.email,
-      created_at: createUser.created_at
+      created_at: createUser.created_at,
     };
-  };
-};
+  }
+}

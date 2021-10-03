@@ -4,12 +4,12 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { NewsModule } from 'src/modules/news/news.module';
-import { UserModule } from 'src/modules/users/users.module';
-import { AuthModule } from 'src/modules/auth/auth.module';
+import { NewsModule } from '../../modules/news/news.module';
+import { UserModule } from '../../modules/users/users.module';
+import { AuthModule } from '../../modules/auth/auth.module';
 
-import { User } from 'src/modules/users/entities/user.entity';
-import { News } from 'src/modules/news/entities/news.entity';
+import { User } from '../../modules/users/entities/user.entity';
+import { News } from '../../modules/news/entities/news.entity';
 
 @Module({
   imports: [

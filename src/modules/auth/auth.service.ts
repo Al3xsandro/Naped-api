@@ -1,8 +1,8 @@
 import {
-    Injectable,
-    BadRequestException,
-    HttpException,
-    HttpStatus,
+  Injectable,
+  BadRequestException,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { AuthenticateUserDTO } from '../auth/dto/authenticate-user.dto';
@@ -20,48 +20,55 @@ import auth from '../../config/auth';
 export class AuthService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
+    private usersRepository: Repository<User>,
   ) {}
 
   async auth(authenticateUserDTO: AuthenticateUserDTO) {
-    const {
-      email,
-      password
-    } = authenticateUserDTO;
+    const { email, password } = authenticateUserDTO;
 
-    if(!email || !password){
+    if (!email || !password) {
       throw new BadRequestException();
     }
 
-    const user = await this.usersRepository.findOne({ where: { email }});
+    const user = await this.usersRepository.findOne({ where: { email } });
 
-    if(!user){
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'Incorrect email or password!'
-      }, HttpStatus.BAD_REQUEST);
+    if (!user) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Incorrect email or password!',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
     const verifyPassword = await compare(password, user.password);
 
-    if(!verifyPassword){
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: 'Incorrect email or password!'
-      }, HttpStatus.BAD_REQUEST);
-    };
+    if (!verifyPassword) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Incorrect email or password!',
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     const userId = user.id;
 
-    const token = sign({
-      userId: user.id
-    }, auth.secret, {
-      subject: userId,
-      expiresIn: auth.expiresIn
-    });
+    const token = sign(
+      {
+        userId: user.id,
+      },
+      auth.secret,
+      {
+        subject: userId,
+        expiresIn: auth.expiresIn,
+      },
+    );
 
     return {
-      token: token
+      token: token,
     };
-  };
-};
+  }
+}

@@ -1,5 +1,5 @@
 export default {
-    secret: process.env.SECRET_JWT || 'secret_hash_example',
+  secret: process.env.SECRET_JWT || 'secret_hash_example',
 
-    expiresIn: '1d'
+  expiresIn: '1d',
 };

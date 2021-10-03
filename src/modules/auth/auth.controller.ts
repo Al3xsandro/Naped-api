@@ -9,7 +9,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/auth')
-  public async auth(@Body() authenticateUserDTO: AuthenticateUserDTO){
+  public async auth(@Body() authenticateUserDTO: AuthenticateUserDTO) {
     return this.authService.auth(authenticateUserDTO);
-  };
-};
+  }
+}
