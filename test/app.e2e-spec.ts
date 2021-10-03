@@ -9,6 +9,8 @@ describe('AppController (e2e)', () => {
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
+      controllers: [],
+      providers: []
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -19,6 +21,9 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(404)
-      .expect('Not found error!');
   });
+
+  afterAll(async () => {
+    await app.close();
+  })
 });
