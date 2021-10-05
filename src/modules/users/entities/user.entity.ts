@@ -25,9 +25,16 @@ export class User {
   @CreateDateColumn()
   created_at: Date;
 
-  constructor() {
+  constructor(user?: Partial<User>) {
     if (!this.id) {
       this.id = uuid();
     }
+
+    this.email = this?.email
+    this.username = this?.username
+    this.password = this?.password
+    this.isVerified = this?.isVerified
+    this.isAdmin = this?.isAdmin
+    this.created_at = this?.created_at
   }
 }
