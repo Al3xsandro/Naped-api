@@ -28,9 +28,17 @@ export class News {
   @CreateDateColumn()
   created_at: Date;
 
-  constructor() {
+  constructor(news?: Partial<News>) {
     if (!this.id) {
       this.id = uuid();
     }
+
+    this.title = this?.title,
+    this.description = this?.description,
+    this.categorie = this?.categorie,
+    this.likes = this?.likes,
+    this.views = this?.views,
+    this.thumbnail = this?.thumbnail,
+    this.created_at = this?.created_at
   }
 }
