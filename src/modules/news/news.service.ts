@@ -49,7 +49,7 @@ export class NewsService {
       );
 
     await this.newsRepository.update(news.id, {
-      views: 1
+      views: news.views + 1
     });
 
     return news;
