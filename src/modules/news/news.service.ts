@@ -6,7 +6,9 @@ import {
 } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
-import { Equal, Like, Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
+
+import { isUUID } from 'class-validator';
 
 import { CreateNewsDTO } from './dto/create-news.dto';
 import { News } from './entities/news.entity';
@@ -92,6 +94,27 @@ export class NewsService {
       description: createNews.description,
       categorie: createNews.categorie,
       created_at: createNews.created_at
+    };
+  };
+
+  async like(id: string){
+    if(!isUUID(id))
+      throw new BadRequestException();
+
+    const news = await this.newsRepository.findOne({ where: { id }});
+
+    if(!news)
+      throw new BadRequestException();
+    
+    const like = await this.newsRepository.update(id, {
+      likes: news.likes + 1
+    });
+
+    if(!like.affected)
+      throw new BadRequestException();
+
+    return {
+      likes: news.likes + 1
     };
   };
 };

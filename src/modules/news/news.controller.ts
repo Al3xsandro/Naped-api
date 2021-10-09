@@ -4,7 +4,8 @@ import {
   Get,
   Post,
   UseGuards,
-  Param
+  Param,
+  Put
 } from '@nestjs/common';
 
 import { CreateNewsDTO } from './dto/create-news.dto';
@@ -35,5 +36,11 @@ export class NewsController {
   @Post('/create')
   public async create(@Body() createNewsDTO: CreateNewsDTO) {
     return this.newsService.create(createNewsDTO);
+  };
+
+  @UseGuards(JwtAuthGuard)
+  @Put('/like/:id')
+  public async like(@Param('id') id: string){
+    return this.newsService.like(id);
   };
 };
