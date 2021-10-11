@@ -3,10 +3,14 @@
     <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
   </p>  
    
-  <p align="center">API Restfull desenvolvida com framework nestjs com intuito de entregar o challenge naped promovido pela codelândia.</p>
+  <p>API Restfull desenvolvida com framework nestjs com intuito de entregar o challenge naped promovido pela codelândia.</p>
    
    
 ## Rotas
+
+   - Swagger
+
+      `[GET]` /api
 
    - Usuários :rocket:
 
@@ -37,6 +41,14 @@
                 isAdmin: false,
                 created_at: "2021-09-28T14:26:24.414Z"
              }
+
+       `[GET]` /users/{username}
+       - Obter informação de um usuário em especifico
+
+              {
+                username: "example",
+                created_at: "2021-09-28T14:26:24.414Z"
+              }
    
    - Notícias :rocket:
    
@@ -63,12 +75,14 @@
               thumbnail: "",
               categorie: ""
             }
+            
+     `[PUT]` /news/like
+      - Favoritar noticia
 
-## Instalação
-
-```bash
-$ yarn
-```
+             {
+                "likes": 1
+             }
+            
 
 ## Iniciando a aplicação
 
