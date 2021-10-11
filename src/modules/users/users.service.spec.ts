@@ -1,11 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BadRequestException } from '@nestjs/common';
-
 import { getRepositoryToken } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
-import { CreateUserDTO } from './dto/create-user.dto';
 
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
@@ -14,7 +11,8 @@ const UserEntityList: User[] = [
     new User({
         email: 'johntree@gmail.com',
         username: 'johntree',
-        password: 'johnhardpassword'
+        password: 'johnhardpassword',
+        created_at: new Date()
     })
 ]
 
@@ -30,8 +28,9 @@ describe('UsersService', () => {
                     provide: getRepositoryToken(User),
                     useValue: {
                         me: jest.fn().mockResolvedValue(UserEntityList),
-                        create: jest.fn().mockReturnValue(UserEntityList[0]),
-                        findOne: jest.fn().mockResolvedValue(UserEntityList)
+                        create: jest.fn().mockReturnValue(UserEntityList),
+                        findOne: jest.fn().mockResolvedValue(UserEntityList),
+                        getUser: jest.fn().mockResolvedValue(UserEntityList[0])
                     },
                 },
             ],
@@ -55,6 +54,12 @@ describe('UsersService', () => {
             const result = await usersService.me(id);
 
             expect(result[0]).toHaveProperty('id');
+        });
+
+        it('should be able to receive user details', async () => {
+            const result = await usersService.getUser('johntree');
+
+            expect(result.rest[0]).toEqual(UserEntityList[0]);
         });
     });
 });

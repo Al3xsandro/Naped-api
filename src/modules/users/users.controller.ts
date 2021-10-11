@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Param,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -25,5 +26,10 @@ export class UsersController {
   @Post('/create')
   public async create(@Body() createUserDTO: CreateUserDTO) {
     return this.userService.create(createUserDTO);
+  }
+
+  @Get('/:username')
+  public async getUser(@Param('username') username: string){
+    return this.userService.getUser(username);
   }
 }

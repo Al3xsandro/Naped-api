@@ -65,4 +65,33 @@ export class UsersService {
       created_at: createUser.created_at,
     };
   }
+
+  async getUser(username: string) {
+    if(!username)
+      throw new BadRequestException();
+    
+    const user = await this.usersRepository.findOne({
+      where: { username }
+    });
+
+    if(!user)
+      throw new HttpException({
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Invalid username'
+        }, HttpStatus.BAD_REQUEST
+      );
+
+    const {
+      id,
+      isAdmin,
+      isVerified,
+      password,
+      email,
+      ...rest
+     } = user;
+
+    return {
+      rest
+    };
+  };
 }
