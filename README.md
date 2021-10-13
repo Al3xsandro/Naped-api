@@ -1,11 +1,15 @@
-<h2 align="center">Naped API</h2>
-  <p align="center">
-    <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-  </p>  
-   
-  <p>API Restfull desenvolvida com framework nestjs com intuito de entregar o challenge naped promovido pela codelândia.</p>
-   
-   
+<h2 align="center">Naped API 🎥</h2>
+
+<p align="center">
+  <a href="/">Tecnologias 🖥️</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+  <a href="/">Layout 🎨</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="/">Como executar ▶️</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="/">Licença 📖</a>
+</p>
+
+Demo: <a href="https://naped-project.herokuapp.com">`https://naped-project.herokuapp.com/api`</a>
+  
+
 ## Rotas
 
    - Swagger
