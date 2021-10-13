@@ -7,6 +7,15 @@
   <a href="/">Licença 📖</a>
 </p>
 
+## Tecnologias 🔭
+  - Nestjs
+  - Swagger UI
+  - Typeorm
+  - Jsonwebtoken
+  - Postgres SQL
+
+## Docs
+
 Demo: <a href="https://naped-project.herokuapp.com">`https://naped-project.herokuapp.com/api`</a>
   
 
