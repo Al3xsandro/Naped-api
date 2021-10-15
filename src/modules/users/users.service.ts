@@ -83,7 +83,6 @@ export class UsersService {
 
     const {
       id,
-      isAdmin,
       isVerified,
       password,
       email,
