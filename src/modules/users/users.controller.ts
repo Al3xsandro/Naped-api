@@ -4,9 +4,10 @@ import {
   Get,
   Post,
   Param,
-  Request,
   UseGuards,
 } from '@nestjs/common';
+
+import { UserId } from 'src/shared/infra/http/decorators/userid.decorator';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
@@ -19,8 +20,8 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  public async me(@Request() req: { user: string }) {
-    return this.userService.me(req.user);
+  public async me(@UserId() user: string) {
+    return this.userService.me(user);
   }
 
   @Post('/create')
