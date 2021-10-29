@@ -9,7 +9,7 @@ import {
 
 import { ApiTags } from '@nestjs/swagger';
 
-import { UserId } from 'src/shared/infra/http/decorators/userid.decorator';
+import { UserId } from '../../shared/infra/http/decorators/userid.decorator';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 

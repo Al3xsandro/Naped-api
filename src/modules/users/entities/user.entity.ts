@@ -1,4 +1,4 @@
-import { Role } from 'src/shared/infra/http/enum/role.enum';
+import { Role } from '../../../shared/infra/http/enum/role.enum';
 import { Column, Entity, PrimaryColumn, CreateDateColumn } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';

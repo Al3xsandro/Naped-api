@@ -13,10 +13,11 @@ import { CreateNewsDTO } from './dto/create-news.dto';
 import { NewsService } from './news.service';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/shared/infra/http/guards/roles.guard';
+import { RolesGuard } from '../../shared/infra/http/guards/roles.guard';
 
-import { Roles } from 'src/shared/infra/http/decorators/roles.decorator';
-import { Role } from 'src/shared/infra/http/enum/role.enum';
+import { Roles } from '../../shared/infra/http/decorators/roles.decorator';
+import { Role } from '../../shared/infra/http/enum/role.enum';
+
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('news')
