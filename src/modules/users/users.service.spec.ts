@@ -49,9 +49,7 @@ describe('UsersService', () => {
 
     describe('GetUserData', () => {
         it('should be able to receive user details', async () => {
-            const id = UserEntityList[0].id
-
-            const result = await usersService.me(id);
+            const result = await usersService.me(UserEntityList[0].id);
 
             expect(result[0]).toHaveProperty('id');
         });

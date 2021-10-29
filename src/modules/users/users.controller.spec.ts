@@ -51,8 +51,7 @@ describe('UserController', () => {
 
     describe('GetUserData', () => {
         it('should be able to receive user details', async () => {
-            const id = { user: UserEntityList[0].id };
-            const result = await usersController.me(id.user);
+            const result = await usersController.me(UserEntityList[0].id);
             
             expect(result[0]).toHaveProperty('id');
             expect(typeof result).toEqual('object');
