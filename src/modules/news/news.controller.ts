@@ -5,14 +5,21 @@ import {
   Post,
   UseGuards,
   Param,
-  Put
+  Put,
+  Delete
 } from '@nestjs/common';
 
 import { CreateNewsDTO } from './dto/create-news.dto';
 import { NewsService } from './news.service';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/shared/infra/http/guards/roles.guard';
 
+import { Roles } from 'src/shared/infra/http/decorators/roles.decorator';
+import { Role } from 'src/shared/infra/http/enum/role.enum';
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('news')
 @Controller('news')
 export class NewsController {
   constructor(private newsService: NewsService) {}
@@ -21,7 +28,7 @@ export class NewsController {
   public async findAll() {
     return this.newsService.findAll();
   };
-
+  
   @Get('/:id')
   public async findById(@Param('id') id: string) {
     return this.newsService.findById(id);
@@ -43,4 +50,11 @@ export class NewsController {
   public async like(@Param('id') id: string){
     return this.newsService.like(id);
   };
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Delete('/delete/:id')
+  public async delete(@Param('id') id: string){
+    return this.newsService.delete(id);
+  }
 };

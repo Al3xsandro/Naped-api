@@ -59,6 +59,7 @@ export class AuthService {
     const token = sign(
       {
         userId: user.id,
+        roles: user.roles
       },
       auth.secret,
       {
