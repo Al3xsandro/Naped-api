@@ -7,6 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
+import { ApiTags } from '@nestjs/swagger';
+
 import { UserId } from 'src/shared/infra/http/decorators/userid.decorator';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -14,6 +16,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 
+@ApiTags('user')
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
@@ -27,7 +30,7 @@ export class UsersController {
   @Post('/create')
   public async create(@Body() createUserDTO: CreateUserDTO) {
     return this.userService.create(createUserDTO);
-  }
+  }3
 
   @Get('/:username')
   public async getUser(@Param('username') username: string){
