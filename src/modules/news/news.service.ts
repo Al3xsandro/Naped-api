@@ -11,13 +11,14 @@ import { Like, Repository } from 'typeorm';
 import { isUUID } from 'class-validator';
 
 import { CreateNewsDTO } from './dto/create-news.dto';
+
 import { News } from './entities/news.entity';
 
 @Injectable()
 export class NewsService {
   constructor(
     @InjectRepository(News)
-    private newsRepository: Repository<News>,
+    private newsRepository: Repository<News>
   ) {};
 
   async findAll() {
@@ -115,6 +116,27 @@ export class NewsService {
 
     return {
       likes: news.likes + 1
+    };
+  };
+
+  async delete(id: string) {
+    const news = await this.newsRepository.findOne({ where: { id }});
+
+    if(!news)
+      throw new HttpException({
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Invalid news id!'
+        },
+        HttpStatus.BAD_REQUEST
+      );
+
+    const deleteNews = await this.newsRepository.delete({ id });
+
+    if(!deleteNews.affected)
+      throw new BadRequestException();
+
+    return {
+      success: true
     };
   };
 };
