@@ -1,3 +1,4 @@
+import { Role } from 'src/shared/infra/http/enum/role.enum';
 import { Column, Entity, PrimaryColumn, CreateDateColumn } from 'typeorm';
 
 import { v4 as uuid } from 'uuid';
@@ -7,23 +8,23 @@ export class User {
   @PrimaryColumn()
   readonly id: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: false })
   username: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
   @Column({ default: false })
   isVerified: boolean;
 
-  @Column({ default: false })
-  isAdmin: boolean;
-
   @CreateDateColumn()
   created_at: Date;
+
+  @Column({ type: 'enum', enum: Role, default: Role.User})
+  roles: Role[];
 
   constructor(user?: Partial<User>) {
     if (!this.id) {
@@ -34,7 +35,6 @@ export class User {
     this.username = this?.username
     this.password = this?.password
     this.isVerified = this?.isVerified
-    this.isAdmin = this?.isAdmin
     this.created_at = this?.created_at
   }
 }
