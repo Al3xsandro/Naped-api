@@ -86,6 +86,7 @@ export class UsersService {
       isVerified,
       password,
       email,
+      roles,
       ...rest
      } = user;
 
