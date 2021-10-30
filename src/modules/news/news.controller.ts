@@ -1,5 +1,5 @@
-import { 
-  Body, 
+import {
+  Body,
   Controller,
   Get,
   Post,
