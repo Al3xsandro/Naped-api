@@ -13,7 +13,6 @@ async function bootstrap() {
     .setTitle('Naped API')
     .setDescription('Naped - Reading the best news every day')
     .setVersion('0.0.1')
-    .addTag('Naped')
     .addBearerAuth()
     .build();
 
