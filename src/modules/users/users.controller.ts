@@ -7,7 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 import { UserId } from '../../shared/infra/http/decorators/userid.decorator';
 
@@ -21,6 +21,7 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get('/me')
   public async me(@UserId() user: string) {
@@ -30,7 +31,7 @@ export class UsersController {
   @Post('/create')
   public async create(@Body() createUserDTO: CreateUserDTO) {
     return this.userService.create(createUserDTO);
-  }3
+  }
 
   @Get('/:username')
   public async getUser(@Param('username') username: string){

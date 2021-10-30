@@ -14,6 +14,7 @@ async function bootstrap() {
     .setDescription('Naped - Reading the best news every day')
     .setVersion('0.0.1')
     .addTag('Naped')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

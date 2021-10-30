@@ -18,7 +18,7 @@ import { RolesGuard } from '../../shared/infra/http/guards/roles.guard';
 import { Roles } from '../../shared/infra/http/decorators/roles.decorator';
 import { Role } from '../../shared/infra/http/enum/role.enum';
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiTags('news')
 @Controller('news')
@@ -40,18 +40,21 @@ export class NewsController {
     return this.newsService.search(title);
   };
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post('/create')
   public async create(@Body() createNewsDTO: CreateNewsDTO) {
     return this.newsService.create(createNewsDTO);
   };
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Put('/like/:id')
   public async like(@Param('id') id: string){
     return this.newsService.like(id);
   };
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Delete('/delete/:id')
