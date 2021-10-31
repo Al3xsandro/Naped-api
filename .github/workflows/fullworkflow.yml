@@ -31,10 +31,3 @@ jobs:
           DB_DATABASE: postgres
           SECRET_JWT: ${{secrets.AUTH_SECRET}}
       run: yarn test
-    - name: Run tests e2e
-      env:
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
-          DB_DATABASE: postgres
-          SECRET_JWT: ${{secrets.AUTH_SECRET}}
-      run: yarn test:e2e
