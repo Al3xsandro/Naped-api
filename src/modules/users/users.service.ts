@@ -76,9 +76,9 @@ export class UsersService {
 
     if(!user)
       throw new HttpException({
-          status: HttpStatus.BAD_REQUEST,
+          status: HttpStatus.NOT_FOUND,
           error: 'Invalid username'
-        }, HttpStatus.BAD_REQUEST
+        }, HttpStatus.NOT_FOUND
       );
 
     const {
