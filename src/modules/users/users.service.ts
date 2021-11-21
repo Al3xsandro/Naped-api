@@ -24,6 +24,10 @@ export class UsersService {
     const user = await this.usersRepository.findOne({
       where: { id },
     });
+  
+    if(!user){
+      throw new BadRequestException();
+    };
 
     const { password, ...rest } = user;
 
