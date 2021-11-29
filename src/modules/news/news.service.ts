@@ -93,6 +93,7 @@ export class NewsService {
     return {
       title: createNews.title,
       description: createNews.description,
+      thumbnail: createNews.thumbnail,
       categorie: createNews.categorie,
       created_at: createNews.created_at
     };
