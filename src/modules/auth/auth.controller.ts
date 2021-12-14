@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 @ApiTags('Authentication')
 @Controller('users')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('/auth')
   public async auth(@Body() authenticateUserDTO: AuthenticateUserDTO) {

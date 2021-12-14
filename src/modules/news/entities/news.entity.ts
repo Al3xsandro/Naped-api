@@ -33,12 +33,12 @@ export class News {
       this.id = uuid();
     }
 
-    this.title = this?.title,
-    this.description = this?.description,
-    this.categorie = this?.categorie,
-    this.likes = this?.likes,
-    this.views = this?.views,
-    this.thumbnail = this?.thumbnail,
-    this.created_at = this?.created_at
+    (this.title = this?.title),
+      (this.description = this?.description),
+      (this.categorie = this?.categorie),
+      (this.likes = this?.likes),
+      (this.views = this?.views),
+      (this.thumbnail = this?.thumbnail),
+      (this.created_at = this?.created_at);
   }
 }

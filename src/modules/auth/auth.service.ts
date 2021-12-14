@@ -59,7 +59,7 @@ export class AuthService {
     const token = sign(
       {
         userId: user.id,
-        roles: user.roles
+        roles: user.roles,
       },
       auth.secret,
       {
@@ -73,7 +73,7 @@ export class AuthService {
         email: user.email,
         username: user.username,
         created_at: user.created_at,
-        isVerified: user.isVerified
+        isVerified: user.isVerified,
       },
       token: token,
     };
