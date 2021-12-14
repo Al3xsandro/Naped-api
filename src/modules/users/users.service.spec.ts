@@ -8,56 +8,54 @@ import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
 const UserEntityList: User[] = [
-    new User({
-        email: 'johntree@gmail.com',
-        username: 'johntree',
-        password: 'johnhardpassword',
-        created_at: new Date()
-    })
-]
+  new User({
+    email: 'johntree@gmail.com',
+    username: 'johntree',
+    password: 'johnhardpassword',
+    created_at: new Date(),
+  }),
+];
 
 describe('UsersService', () => {
-    let usersService: UsersService;
-    let usersRepository: Repository<User>;
+  let usersService: UsersService;
+  let usersRepository: Repository<User>;
 
-    beforeEach(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                UsersService,
-                {
-                    provide: getRepositoryToken(User),
-                    useValue: {
-                        me: jest.fn().mockResolvedValue(UserEntityList),
-                        create: jest.fn().mockReturnValue(UserEntityList),
-                        findOne: jest.fn().mockResolvedValue(UserEntityList),
-                        getUser: jest.fn().mockResolvedValue(UserEntityList[0])
-                    },
-                },
-            ],
-        }).compile();
-        
-        usersService = module.get<UsersService>(UsersService);
-        usersRepository = module.get<Repository<User>>(
-            getRepositoryToken(User)
-        );
-    })
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        UsersService,
+        {
+          provide: getRepositoryToken(User),
+          useValue: {
+            me: jest.fn().mockResolvedValue(UserEntityList),
+            create: jest.fn().mockReturnValue(UserEntityList),
+            findOne: jest.fn().mockResolvedValue(UserEntityList),
+            getUser: jest.fn().mockResolvedValue(UserEntityList[0]),
+          },
+        },
+      ],
+    }).compile();
 
-    it('should be defined', async () => {
-        expect(usersService).toBeDefined();
-        expect(usersRepository).toBeDefined();
+    usersService = module.get<UsersService>(UsersService);
+    usersRepository = module.get<Repository<User>>(getRepositoryToken(User));
+  });
+
+  it('should be defined', async () => {
+    expect(usersService).toBeDefined();
+    expect(usersRepository).toBeDefined();
+  });
+
+  describe('GetUserData', () => {
+    it('should be able to receive user details', async () => {
+      const result = await usersService.me(UserEntityList[0].id);
+
+      expect(result[0]).toHaveProperty('id');
     });
 
-    describe('GetUserData', () => {
-        it('should be able to receive user details', async () => {
-            const result = await usersService.me(UserEntityList[0].id);
+    it('should be able to receive user details', async () => {
+      const result = await usersService.getUser('johntree');
 
-            expect(result[0]).toHaveProperty('id');
-        });
-
-        it('should be able to receive user details', async () => {
-            const result = await usersService.getUser('johntree');
-
-            expect(result.rest[0]).toEqual(UserEntityList[0]);
-        });
+      expect(result.rest[0]).toEqual(UserEntityList[0]);
     });
+  });
 });

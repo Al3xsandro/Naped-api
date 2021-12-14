@@ -26,7 +26,7 @@ import { News } from '../../../modules/news/entities/news.entity';
     }),
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 10
+      limit: 10,
     }),
     UserModule,
     NewsModule,

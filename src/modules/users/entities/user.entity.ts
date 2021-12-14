@@ -23,7 +23,7 @@ export class User {
   @CreateDateColumn()
   created_at: Date;
 
-  @Column({ type: 'enum', enum: Role, default: Role.User})
+  @Column({ type: 'enum', enum: Role, default: Role.User })
   roles: Role[];
 
   constructor(user?: Partial<User>) {
@@ -31,10 +31,10 @@ export class User {
       this.id = uuid();
     }
 
-    this.email = this?.email
-    this.username = this?.username
-    this.password = this?.password
-    this.isVerified = this?.isVerified
-    this.created_at = this?.created_at
+    this.email = this?.email;
+    this.username = this?.username;
+    this.password = this?.password;
+    this.isVerified = this?.isVerified;
+    this.created_at = this?.created_at;
   }
 }

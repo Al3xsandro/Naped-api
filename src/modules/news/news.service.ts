@@ -1,8 +1,8 @@
-import { 
+import {
   BadRequestException,
   HttpException,
   HttpStatus,
-  Injectable
+  Injectable,
 } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
@@ -18,74 +18,70 @@ import { News } from './entities/news.entity';
 export class NewsService {
   constructor(
     @InjectRepository(News)
-    private newsRepository: Repository<News>
-  ) {};
+    private newsRepository: Repository<News>,
+  ) {}
 
   async findAll() {
     const news = await this.newsRepository.find();
 
-    if(!news[0])
-      throw new HttpException({
+    if (!news[0])
+      throw new HttpException(
+        {
           status: HttpStatus.NO_CONTENT,
           error: 'No content!',
         },
-        HttpStatus.NO_CONTENT
+        HttpStatus.NO_CONTENT,
       );
 
     return news;
-  };
+  }
 
   async findById(id: string) {
-    if(!id.trim())
-      throw new BadRequestException();
+    if (!id.trim()) throw new BadRequestException();
 
     const news = await this.newsRepository.findOne({ where: { id } });
 
-    if(!news)
-      throw new HttpException({
+    if (!news)
+      throw new HttpException(
+        {
           status: HttpStatus.NO_CONTENT,
           error: 'No content!',
         },
-        HttpStatus.NO_CONTENT
+        HttpStatus.NO_CONTENT,
       );
 
     await this.newsRepository.update(news.id, {
-      views: news.views + 1
+      views: news.views + 1,
     });
 
     return news;
-  };
+  }
 
   async search(title: string) {
-    if(!title.trim())
-      throw new BadRequestException();
+    if (!title.trim()) throw new BadRequestException();
 
-    const news = await this.newsRepository.find({ title: Like(`%${title}%`) })
+    const news = await this.newsRepository.find({ title: Like(`%${title}%`) });
 
-    if(!news[0])
-      throw new HttpException({
+    if (!news[0])
+      throw new HttpException(
+        {
           status: HttpStatus.NO_CONTENT,
           error: 'No content!',
         },
-        HttpStatus.NO_CONTENT
+        HttpStatus.NO_CONTENT,
       );
 
     return news;
-  };
+  }
 
   async create(createNewsDTO: CreateNewsDTO) {
-    const { 
-      title,
-      description,
-      thumbnail,
-      categorie
-    } = createNewsDTO;
+    const { title, description, thumbnail, categorie } = createNewsDTO;
 
     const news = this.newsRepository.create({
       title,
       description,
       thumbnail,
-      categorie
+      categorie,
     });
 
     const createNews = await this.newsRepository.save(news);
@@ -95,49 +91,46 @@ export class NewsService {
       description: createNews.description,
       thumbnail: createNews.thumbnail,
       categorie: createNews.categorie,
-      created_at: createNews.created_at
+      created_at: createNews.created_at,
     };
-  };
+  }
 
-  async like(id: string){
-    if(!isUUID(id))
-      throw new BadRequestException();
+  async like(id: string) {
+    if (!isUUID(id)) throw new BadRequestException();
 
-    const news = await this.newsRepository.findOne({ where: { id }});
+    const news = await this.newsRepository.findOne({ where: { id } });
 
-    if(!news)
-      throw new BadRequestException();
-    
+    if (!news) throw new BadRequestException();
+
     const like = await this.newsRepository.update(id, {
-      likes: news.likes + 1
+      likes: news.likes + 1,
     });
 
-    if(!like.affected)
-      throw new BadRequestException();
+    if (!like.affected) throw new BadRequestException();
 
     return {
-      likes: news.likes + 1
+      likes: news.likes + 1,
     };
-  };
+  }
 
   async delete(id: string) {
-    const news = await this.newsRepository.findOne({ where: { id }});
+    const news = await this.newsRepository.findOne({ where: { id } });
 
-    if(!news)
-      throw new HttpException({
+    if (!news)
+      throw new HttpException(
+        {
           status: HttpStatus.BAD_REQUEST,
-          error: 'Invalid news id!'
+          error: 'Invalid news id!',
         },
-        HttpStatus.BAD_REQUEST
+        HttpStatus.BAD_REQUEST,
       );
 
     const deleteNews = await this.newsRepository.delete({ id });
 
-    if(!deleteNews.affected)
-      throw new BadRequestException();
+    if (!deleteNews.affected) throw new BadRequestException();
 
     return {
-      success: true
+      success: true,
     };
-  };
-};
+  }
+}

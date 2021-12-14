@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Param,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, UseGuards } from '@nestjs/common';
 
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
@@ -34,7 +27,7 @@ export class UsersController {
   }
 
   @Get('/:username')
-  public async getUser(@Param('username') username: string){
+  public async getUser(@Param('username') username: string) {
     return this.userService.getUser(username);
   }
 }

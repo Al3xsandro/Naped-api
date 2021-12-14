@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Injectable,
   BadRequestException,
@@ -24,10 +25,10 @@ export class UsersService {
     const user = await this.usersRepository.findOne({
       where: { id },
     });
-  
-    if(!user){
+
+    if (!user) {
       throw new BadRequestException();
-    };
+    }
 
     const { password, ...rest } = user;
 
@@ -71,31 +72,25 @@ export class UsersService {
   }
 
   async getUser(username: string) {
-    if(!username)
-      throw new BadRequestException();
-    
+    if (!username) throw new BadRequestException();
+
     const user = await this.usersRepository.findOne({
-      where: { username }
+      where: { username },
     });
 
-    if(!user)
-      throw new HttpException({
+    if (!user)
+      throw new HttpException(
+        {
           status: HttpStatus.NOT_FOUND,
-          error: 'Invalid username'
-        }, HttpStatus.NOT_FOUND
+          error: 'Invalid username',
+        },
+        HttpStatus.NOT_FOUND,
       );
 
-    const {
-      id,
-      isVerified,
-      password,
-      email,
-      roles,
-      ...rest
-     } = user;
+    const { id, isVerified, password, email, roles, ...rest } = user;
 
     return {
-      rest
+      rest,
     };
-  };
+  }
 }
