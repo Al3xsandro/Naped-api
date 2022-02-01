@@ -8,7 +8,7 @@ import { NewsService } from './news.service';
 const NewsEntityList: News[] = [
   new News({
     title: 'example',
-    categorie: 'tvshows',
+    category: 'tvshows',
     description: 'example lorem ipsum',
     likes: 10,
     views: 10,

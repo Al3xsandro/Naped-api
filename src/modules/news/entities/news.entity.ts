@@ -23,7 +23,7 @@ export class News {
   thumbnail: string;
 
   @Column()
-  categorie: string;
+  category: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -35,7 +35,7 @@ export class News {
 
     (this.title = this?.title),
       (this.description = this?.description),
-      (this.categorie = this?.categorie),
+      (this.category = this?.category),
       (this.likes = this?.likes),
       (this.views = this?.views),
       (this.thumbnail = this?.thumbnail),

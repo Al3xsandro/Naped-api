@@ -75,13 +75,13 @@ export class NewsService {
   }
 
   async create(createNewsDTO: CreateNewsDTO) {
-    const { title, description, thumbnail, categorie } = createNewsDTO;
+    const { title, description, thumbnail, category } = createNewsDTO;
 
     const news = this.newsRepository.create({
       title,
       description,
       thumbnail,
-      categorie,
+      category,
     });
 
     const createNews = await this.newsRepository.save(news);
@@ -90,7 +90,7 @@ export class NewsService {
       title: createNews.title,
       description: createNews.description,
       thumbnail: createNews.thumbnail,
-      categorie: createNews.categorie,
+      category: createNews.category,
       created_at: createNews.created_at,
     };
   }

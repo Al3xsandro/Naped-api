@@ -16,5 +16,5 @@ export class CreateNewsDTO {
 
   @IsNotEmpty()
   @ApiProperty()
-  categorie: string;
+  category: string;
 }
